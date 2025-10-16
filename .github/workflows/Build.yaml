@@ -21,7 +21,7 @@ jobs:
             - name: Clone repo
               uses: actions/checkout@v5
 
-            - name: Install Node - ${{ matrix.nodejs-version }}
+            - name: Install Node - ${{ matrix.nodejs-version }} 
               uses: actions/setup-node@v6
               with:
                 node-version: ${{ matrix.nodejs-version }}
@@ -40,8 +40,8 @@ jobs:
               if: always()
               uses: actions/upload-artifact@v4
               with:
-                name: Test-Results-${{ matrix.nodejs-version }}
-                path: test-results-${{ matrix.nodejs-version }}.xml
+                name: Test-Results-${{ matrix.nodejs-version }}-${{ matrix.os }}
+                path: test-results-${{ matrix.nodejs-version }}-${{ matrix.os }}.xml
     code-coverage:
         runs-on: ubuntu-latest
         steps:
