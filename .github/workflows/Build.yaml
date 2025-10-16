@@ -15,8 +15,8 @@ jobs:
         strategy:
             matrix:
                 nodejs-version: [18, 19, 20]
-                # os: [ubuntu-latest]
-        runs-on: ubuntu-latest
+                os: [ubuntu-latest, macos-latest]
+        runs-on: ${{ matrix.os }}
         steps:
             - name: Clone repo
               uses: actions/checkout@v5
