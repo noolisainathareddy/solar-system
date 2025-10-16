@@ -27,3 +27,9 @@ jobs:
             
             - name: Run test cases
               run: npm test
+
+            - name: Upload Test results
+              uses: actions/upload-artifact@v4
+              with:
+                name: Test-Results
+                path: test-results.xml
