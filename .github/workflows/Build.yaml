@@ -12,15 +12,18 @@ env:
     MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
 jobs:
     build-and-test:
+        strategy:
+            matrix:
+                nodejs-version: [18, 19, 20]
         runs-on: ubuntu-latest
         steps:
             - name: Clone repo
               uses: actions/checkout@v5
 
-            - name: Install Node
+            - name: Install Node - ${{ matrix.nodejs-version }}
               uses: actions/setup-node@v6
               with:
-                node-version: '18'
+                node-version: ${{ matrix.nodejs-version }}
 
             - name: Install dependencies
               run: npm install
