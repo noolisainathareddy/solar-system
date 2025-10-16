@@ -33,9 +33,11 @@ jobs:
               run: npm test
 
             - name: Rename test results artifact file
+              if: failure()
               run: mv test-results.xml test-results-${{ matrix.nodejs-version }}.xml
 
             - name: Upload Test results
+              if: always()
               uses: actions/upload-artifact@v4
               with:
                 name: Test-Results-${{ matrix.nodejs-version }}
