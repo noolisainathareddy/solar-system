@@ -99,9 +99,9 @@ jobs:
             docker images
             docker run --name solar-system-app -d \
             -p 3000:3000 \
-            -e MONGO_URI: mongodb+srv://supercluster.d83jj.mongodb.net/superData \
-            -e MONGO_USERNAME: ${{ vars.MONGO_USERNAME }} \
-            -e MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }} \
+            -e MONGO_URI=mongodb+srv://supercluster.d83jj.mongodb.net/superData \
+            -e MONGO_USERNAME=${{ vars.MONGO_USERNAME }} \
+            -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
             ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
             curl -v 127.0.0.1/live
 
