@@ -104,6 +104,9 @@ jobs:
             -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
             ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
             docker ps
-            curl -v 0.0.0.0:3000/live
 
-
+        - name: Docker Push
+          uses: docker/build-push-action@v3
+          with:
+            push: true
+            tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
