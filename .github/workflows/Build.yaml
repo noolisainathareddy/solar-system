@@ -14,8 +14,8 @@ jobs:
     unit-testing:
         strategy:
             matrix:
-                nodejs-version: [18, 19, 20]
-                os: [ubuntu-latest, macos-latest]
+                nodejs-version: [18]
+                os: [ubuntu-latest]
         runs-on: ${{ matrix.os }}
         steps:
             - name: Clone repo
@@ -93,3 +93,6 @@ jobs:
           with:
             push: false
             tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
+
+        - name: List Images
+          run: docker images
