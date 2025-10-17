@@ -76,3 +76,13 @@ jobs:
               with:
                 name: Coverage-Results
                 path: coverage
+
+    Docker-Login:
+        needs: [unit-testing, code-coverage]
+        runs-on: ubuntu-latest
+        steps:
+        - name: Login to Docker
+          uses: docker/login-action@v3
+          with:
+            username: ${{ vars.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
