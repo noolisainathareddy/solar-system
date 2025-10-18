@@ -79,7 +79,7 @@ jobs:
 
     Docker-Login:
         container:
-          image: node20
+          image: node:18
         needs: [unit-testing, code-coverage]
         runs-on: ubuntu-latest
         steps:
