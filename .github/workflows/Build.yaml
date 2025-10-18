@@ -49,6 +49,8 @@ jobs:
                 name: Test-Results-${{ matrix.nodejs-version }}-${{ matrix.os }}
                 path: test-results-${{ matrix.nodejs-version }}-${{ matrix.os }}.xml
     code-coverage:
+        container: 
+          image: node:18
         runs-on: ubuntu-latest
         steps:
             - name: Clone Repo
@@ -78,16 +80,10 @@ jobs:
                 path: coverage
 
     Docker-Login:
-        container:
-          image: node:18
         needs: [unit-testing, code-coverage]
         runs-on: ubuntu-latest
         steps:
-        - name: Install Docker
-          run: |
-            sudo apt update
-            sudo apt install docker.io 
-            
+
         - name: Login to Docker
           uses: docker/login-action@v3
           with:
