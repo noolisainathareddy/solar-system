@@ -78,6 +78,8 @@ jobs:
                 path: coverage
 
     Docker-Login:
+        container:
+          image: node20
         needs: [unit-testing, code-coverage]
         runs-on: ubuntu-latest
         steps:
