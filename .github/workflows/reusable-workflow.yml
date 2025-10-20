@@ -38,3 +38,4 @@ jobs:
                 echo ${{ env.test }}
                 echo ${{ vars.ENV_NAME }}
                 echo ${{ github.ref }}
+                echo ${{ secrets.DEV_PASS }}
