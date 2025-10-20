@@ -112,6 +112,7 @@ jobs:
             push: true
             tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
     Dev-Deploy:
+      if: github.ref != 'refs/heads/main'
       environment:
         name: dev
       runs-on: ubuntu-latest
