@@ -78,7 +78,6 @@ jobs:
               with:
                 name: Coverage-Results
                 path: coverage
-
     Docker-Login:
         # needs: [unit-testing, code-coverage]
         runs-on: ubuntu-latest
@@ -112,7 +111,9 @@ jobs:
           with:
             push: true
             tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
-    Deploy:
+    Dev-Deploy:
+      environment:
+        name: dev
       runs-on: ubuntu-latest
       steps:
         - name: Install Kubectl
@@ -140,6 +141,8 @@ jobs:
             echo "test=sai" >> $GITHUB_ENV
           
         - name: step level env
-          run: echo ${{ env.test}}
+          run: | 
+            echo ${{ env.test }}
+            echo ${{ vars.ENV_NAME }}
 
         
