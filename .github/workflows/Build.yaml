@@ -80,7 +80,7 @@ jobs:
                 path: coverage
 
     Docker-Login:
-        needs: [unit-testing, code-coverage]
+        # needs: [unit-testing, code-coverage]
         runs-on: ubuntu-latest
         steps:
 
@@ -113,7 +113,6 @@ jobs:
             push: true
             tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
     Deploy:
-      needs: Docker-Login
       runs-on: ubuntu-latest
       steps:
         - name: Install Kubectl
@@ -132,6 +131,8 @@ jobs:
             REPLICAS: ${{ vars.REPLICAS }}  
         
         - name: Cat deployment
-          run: cat kubernetes/development/deployment.yaml
-          
+          run: |
+            ls -l
+            cat kubernetes/development/deployment.yaml
+
         
