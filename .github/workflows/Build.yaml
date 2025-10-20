@@ -137,5 +137,9 @@ jobs:
           run: |
             ls -l
             cat kubernetes/development/deployment.yaml
+            echo "test=sai" >> $GITHUB_ENV
+          
+        - name: step level env
+          run: echo ${{ env.test}}
 
         
