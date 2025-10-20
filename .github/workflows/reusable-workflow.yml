@@ -39,3 +39,4 @@ jobs:
                 echo ${{ vars.ENV_NAME }}
                 echo ${{ github.ref }}
                 echo ${{ secrets.DEV_PASS }}
+                echo ${{ secrets.MONGO_PASSWORD }}
