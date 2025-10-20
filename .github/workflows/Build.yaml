@@ -113,38 +113,6 @@ jobs:
             tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
     Dev-Deploy:
       if: github.ref != 'refs/heads/main'
-      environment:
-        name: dev
-      runs-on: ubuntu-latest
-      steps:
-        - name: Install Kubectl
-          uses: azure/setup-kubectl@v4
-          with:
-            version: 'v1.30.0'
-       
-        - name: Clone repo
-          uses: actions/checkout@v5
-       
-        - name: Replace Namespace
-          uses: cschleiden/replace-tokens@v1
-          with:
-            tokenPrefix: '_{_'
-            tokenSuffix: '_}_'
-            files: '["kubernetes/development/deployment.yaml"]'
-          env:
-            NAMESPACE: ${{ vars.NAMESPACE }}
-            REPLICAS: ${{ vars.REPLICAS }}  
-        
-        - name: Cat deployment
-          run: |
-            ls -l
-            cat kubernetes/development/deployment.yaml
-            echo "test=sai" >> $GITHUB_ENV
-          
-        - name: step level env
-          run: | 
-            echo ${{ env.test }}
-            echo ${{ vars.ENV_NAME }}
-            echo ${{ github.ref }}
+      uses: ./.github/workflows/reusable-workflow.yml
 
         
