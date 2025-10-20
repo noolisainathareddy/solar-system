@@ -112,3 +112,16 @@ jobs:
           with:
             push: true
             tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
+    Deploy:
+      needs: Docker-Login
+      runs-on: ubuntu-latest
+      steps:
+        - name: Install Kubectl
+          uses: azure/setup-kubectl@v4
+          with:
+            version: 'v1.30.0'
+        - name: kubectl commands
+          run: |
+            kubectl version
+            kubectl get pods
+            kubectl get nodes
