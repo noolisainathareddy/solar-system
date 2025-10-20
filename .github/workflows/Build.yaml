@@ -114,5 +114,8 @@ jobs:
     Dev-Deploy:
       if: github.ref != 'refs/heads/main'
       uses: ./.github/workflows/reusable-workflow.yml
+      # secrets:
+      #   MONGO_URI: ${{ vars.MONGO_URI}}
+
 
         

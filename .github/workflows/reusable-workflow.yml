@@ -2,8 +2,11 @@ name: reusable-workflow
 
 on:
     workflow_call:
+        # secrets:
+        #   MONGO_URI:
+        #     required: true
 
-jobs:
+jobs:   
     reuse-deploy:
         environment:
             name: dev
@@ -40,3 +43,5 @@ jobs:
                 echo ${{ github.ref }}
                 echo ${{ secrets.DEV_PASS }}
                 echo ${{ secrets.MONGO_PASSWORD }}
+
+                
