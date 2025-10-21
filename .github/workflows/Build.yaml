@@ -137,7 +137,18 @@ jobs:
         - name: List files
           run: |  
             ls -l
-            aws --version
+        
+        - name: upload to s3
+          uses: jakejarvis/s3-sync-action@master
+          with:
+            args: --acl public-read --follow-symlinks --delete
+          env:
+            AWS_S3_BUCKET: 'sainathchottu-test-bucket'
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            SOURCE_DIR: 'Test-Results-${{ matrix.nodejs-version }}-${{ matrix.os }}'
+            DEST_DIR: 'Test-Results-${{ matrix.nodejs-version }}-${{ matrix.os }}' 
+            
 
 
 
