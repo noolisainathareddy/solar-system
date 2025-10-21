@@ -137,6 +137,7 @@ jobs:
         - name: List files
           run: |  
             ls -l
+            pwd
         
         - name: upload to s3
           uses: jakejarvis/s3-sync-action@master
