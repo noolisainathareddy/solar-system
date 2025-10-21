@@ -139,7 +139,7 @@ jobs:
             ls -l
             pwd
             mkdir test-results
-            mv Test-Results-${{ matrix.nodejs-version }}-${{ matrix.os }} test-results/
+            mv test-results-${{ matrix.nodejs-version }}-${{ matrix.os }}.xml test-results/
         
         - name: upload to s3
           uses: jakejarvis/s3-sync-action@master
