@@ -44,7 +44,7 @@ jobs:
 
             - name: Rename test results artifact file
               if: always()
-              run: mv test-results.xml test-results-${{ matrix.nodejs-version }}.xml
+              run: mv test-results.xml test-results-${{ matrix.nodejs-version }}-${{ matrix.os }}.xml
 
             - name: Upload Test results
               if: always()
