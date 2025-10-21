@@ -138,6 +138,8 @@ jobs:
           run: |  
             ls -l
             pwd
+            mkdir test-results
+            mv Test-Results-${{ matrix.nodejs-version }}-${{ matrix.os }} test-results/
         
         - name: upload to s3
           uses: jakejarvis/s3-sync-action@master
@@ -147,8 +149,8 @@ jobs:
             AWS_S3_BUCKET: 'sainathchottu-test-bucket'
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            SOURCE_DIR: '/home/runner/work/solar-system/solar-system/test-results-${{ matrix.nodejs-version }}-${{ matrix.os }}.xml'
-            # DEST_DIR: 'test-results-${{ matrix.nodejs-version }}-${{ matrix.os }}.xml' 
+            SOURCE_DIR: 'test-results'
+            DEST_DIR: 'test-results'
             
 
 
