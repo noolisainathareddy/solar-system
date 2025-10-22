@@ -29,15 +29,20 @@ jobs:
               uses: actions/setup-node@v6
               with:
                 node-version: ${{ matrix.nodejs-version }}
+                
+            - name: NPM Cache
+              uses: ./.github/npm_builder
+              with: 
+                cache_path: 'node_modules'
+              
+            # - name: cache-dependecies
+            #   uses: actions/cache@v4
+            #   with:
+            #     path: node_modules
+            #     key: ${{ matrix.os}}-node-modes-${{ matrix.nodejs-version}}-${{ hashFiles('package-lock.json')}}
 
-            - name: cache-dependecies
-              uses: actions/cache@v4
-              with:
-                path: node_modules
-                key: ${{ matrix.os}}-node-modes-${{ matrix.nodejs-version}}-${{ hashFiles('package-lock.json')}}
-
-            - name: Install dependencies
-              run: npm install
+            # - name: Install dependencies
+            #   run: npm install
             
             - name: Run-test-cases
               run: npm test
