@@ -31,7 +31,7 @@ jobs:
                 node-version: ${{ matrix.nodejs-version }}
 
             - name: NPM Cache
-              uses: ./.github/npm_builder/actions.yml
+              uses: ./.github/npm_builder
               with: 
                 cache_path: 'node_modules'
               
