@@ -130,7 +130,7 @@ jobs:
       needs: [unit-testing]
       strategy:
         matrix:
-          os: [ubuntu-latest]
+          os: [self-hosted,Linux,X64,devops]
           nodejs-version: [18]
       runs-on: ${{ matrix.os }}
       steps:
