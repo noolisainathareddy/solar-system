@@ -159,7 +159,7 @@ jobs:
             
     slack-notify:
       if: always()
-      runs-on: ubuntu-latest
+      runs-on: [self-hosted,Linux,X64,devops]
       steps:
         - name: Send notification
           uses: slackapi/slack-github-action@v2.1.1
