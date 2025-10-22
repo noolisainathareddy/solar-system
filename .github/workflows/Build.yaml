@@ -29,9 +29,9 @@ jobs:
               uses: actions/setup-node@v6
               with:
                 node-version: ${{ matrix.nodejs-version }}
-                
+
             - name: NPM Cache
-              uses: ./.github/npm_builder
+              uses: ./.github/npm_builder/actions.yml
               with: 
                 cache_path: 'node_modules'
               
