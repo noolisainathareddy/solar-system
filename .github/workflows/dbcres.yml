@@ -1,0 +1,22 @@
+name: test-workflo-getdbcreds
+
+on: 
+    push:
+        branches:
+            - main
+            - feature
+
+jobs:
+    login-aws:
+        runs-on: ubuntu-latest
+        steps:
+            - name: login aws
+              uses: aws-actions/configure-aws-credentials@v5.1.0
+              with:
+                audiance: sts.amazonaws.com
+                aws-region: us-east-1
+                role-to-assume: arn:aws:iam::233800678850:oidc-provider/token.actions.githubusercontent.com
+            - name: Get S3 details
+              run: |
+                aws version
+                aws s3 ls
