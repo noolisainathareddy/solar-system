@@ -16,9 +16,8 @@ jobs:
             - name: login aws
               uses: aws-actions/configure-aws-credentials@v5.1.0
               with:
-                audiance: sts.amazonaws.com
                 aws-region: us-east-1
-                role-to-assume: arn:aws:iam::233800678850:oidc-provider/token.actions.githubusercontent.com
+                role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
             - name: Get S3 details
               run: |
                 aws version
