@@ -1,0 +1,19 @@
+name: NPM-BUILDER
+
+description: "Created this composite action for cache npm"
+inputs:
+  cache_path: #path 
+    description: "Provide path for cache"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: cache-dependecies
+      uses: actions/cache@v4  
+      with:
+        path: node_modules
+        key: ${{ matrix.os}}-node-modes-${{ matrix.nodejs-version}}-${{ hashFiles('package-lock.json')}}
+
+    - name: Install dependencies
+      run: npm install
+      shell: bash
