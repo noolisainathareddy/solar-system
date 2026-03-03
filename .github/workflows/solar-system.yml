@@ -5,6 +5,8 @@ on:
     push:
         branches:
             main
+env:
+    MONGO_URI: ${{ vars.MONGO_URL }}
 jobs:
     unit-testing:
         runs-on: ubuntu-latest
@@ -17,5 +19,8 @@ jobs:
                 node-version: 18
         -   name: Install Dependencies
             run: npm install
-        -   name: Run Test cases
-            run: npm test
+        -   name: Run Test cases scenarios
+            run: |
+                echo ${{ env.MONGO_URI }}
+                npm test
+
