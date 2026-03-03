@@ -12,14 +12,18 @@ env:
 
 jobs:
     unit-testing:
-        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                nodejs-version: [18,19,20]
+                operating-system: [ubuntu-latest, macos-latest]
+        runs-on: ${{ matrix.operating-system }}
         steps:
         -   name: Checkout Code
             uses: actions/checkout@v4
         -   name: Download Node version
             uses: actions/setup-node@v6
             with:
-                node-version: 18
+                node-version: ${{ matrix.nodejs-version }}
         -   name: Install Dependencies
             run: npm install
         -   name: Run Test cases test
@@ -29,7 +33,7 @@ jobs:
         -   name: Upload test results
             uses: actions/upload-artifact@v4
             with:
-                name: Test Results
+                name: Test-Results-${{matrix.nodejs-version}}-${{matrix.operating-system}}
                 path: test-results.xml
     post-unit-testing:
         runs-on: ubuntu-latest
@@ -38,6 +42,6 @@ jobs:
         -   name: Download artifacts
             uses: actions/download-artifact@v4
             with:
-                name: Test Results
+                name: Test-Results-${{matrix.nodejs-version}}-${{matrix.operating-system}}
         -   name: Read artifacts
             run: cat test-results.xml | head -n 10
