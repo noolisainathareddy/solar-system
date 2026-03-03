@@ -31,3 +31,11 @@ jobs:
             with:
                 name: Test Results
                 path: test-results.xml
+    post-unit-testing:
+        runs-on: ubuntu-latest
+        needs: unit-testing
+        steps:
+        -   name: Download artifacts
+            uses: actions/download-artifacts@v3
+            with:
+                name: Test Results
