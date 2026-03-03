@@ -26,3 +26,8 @@ jobs:
             run: |
                 echo ${{ env.MONGO_URI }}
                 npm test
+        -   name: Upload test results
+            uses: actions/upload-artifact@v3
+            with:
+                name: Test Results
+                path: test-results.xml
