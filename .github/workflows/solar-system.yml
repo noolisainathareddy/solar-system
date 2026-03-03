@@ -36,7 +36,11 @@ jobs:
                 name: Test-Results-${{matrix.nodejs-version}}-${{matrix.operating-system}}
                 path: test-results.xml
     post-unit-testing:
-        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                nodejs-version: [18,19,20]
+                operating-system: [ubuntu-latest, macos-latest]
+        runs-on: ${{matrix.operating-system}}
         needs: unit-testing
         steps:
         -   name: Download artifacts
