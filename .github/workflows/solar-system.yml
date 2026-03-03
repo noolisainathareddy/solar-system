@@ -24,6 +24,11 @@ jobs:
             uses: actions/setup-node@v6
             with:
                 node-version: ${{ matrix.nodejs-version }}
+        -   name: Cache Dependencies
+            uses: actions/cache@v5
+            with:
+                path: node_modules
+                key: ${{ matrix.operating-system }}-${{ matrix.nodejs-version }}-${{hashFiles('package-lock.json')}}
         -   name: Install Dependencies
             run: npm install
         -   name: Run Test cases test
@@ -50,7 +55,11 @@ jobs:
     #     -   name: Read artifacts
     #         run: cat test-results.xml | head -n 10
     code-coverage:
-        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                nodejs-version: [18]
+                operating-system: [macos-latest]
+        runs-on: ${{ matrix.operating-system }}
         steps:
         -   name: Checkout Code
             uses: actions/checkout@v4
@@ -58,6 +67,11 @@ jobs:
             uses: actions/setup-node@v3
             with:
                 node-version: 18
+        -   name: Cache Dependencies
+            uses: actions/cache@v5
+            with:
+                path: node_modules
+                key: ${{ matrix.operating-system }}-${{ matrix.nodejs-version }}-${{hashFiles('package-lock.json')}}
         -   name: Install dependencies
             run: npm install
         -   name: Run Coverage
@@ -67,5 +81,5 @@ jobs:
             if: always()
             uses: actions/upload-artifact@v4
             with:
-                name: code-coverage-artifacts
+                name: ${{ matrix.operating-system }}-${{ matrix.nodejs-version }}-code-coverage-artifacts
                 path: coverage
