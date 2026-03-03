@@ -14,8 +14,8 @@ jobs:
     unit-testing:
         strategy:
             matrix:
-                nodejs-version: [18,19,20]
-                operating-system: [ubuntu-latest, macos-latest]
+                nodejs-version: [18]
+                operating-system: [macos-latest]
         runs-on: ${{ matrix.operating-system }}
         steps:
         -   name: Checkout Code
@@ -30,22 +30,40 @@ jobs:
             run: |
                 echo ${{ env.MONGO_URI }}
                 npm test
-        -   name: Upload test results
+        # -   name: Upload test results
+        #     uses: actions/upload-artifact@v4
+        #     with:
+        #         name: Test-Results-${{matrix.nodejs-version}}-${{matrix.operating-system}}
+        #         path: test-results.xml
+    # post-unit-testing:
+    #     strategy:
+    #         matrix:
+    #             nodejs-version: [18,19,20]
+    #             operating-system: [ubuntu-latest, macos-latest]
+    #     runs-on: ${{matrix.operating-system}}
+    #     needs: unit-testing
+    #     steps:
+    #     -   name: Download artifacts
+    #         uses: actions/download-artifact@v4
+    #         with:
+    #             name: Test-Results-${{matrix.nodejs-version}}-${{matrix.operating-system}}
+    #     -   name: Read artifacts
+    #         run: cat test-results.xml | head -n 10
+    code-coverage:
+        runs-on: ubuntu-latest
+        steps:
+        -   name: Checkout Code
+            uses: actions/checkout@v4
+        -   name: Install Node
+            uses: actions/setup-node@v3
+            with:
+                node-version: 18
+        -   name: Install dependencies
+            run: npm install
+        -   name: Run Coverage
+            run: npm run coverage
+        -   name: Upload artifacts
             uses: actions/upload-artifact@v4
             with:
-                name: Test-Results-${{matrix.nodejs-version}}-${{matrix.operating-system}}
-                path: test-results.xml
-    post-unit-testing:
-        strategy:
-            matrix:
-                nodejs-version: [18,19,20]
-                operating-system: [ubuntu-latest, macos-latest]
-        runs-on: ${{matrix.operating-system}}
-        needs: unit-testing
-        steps:
-        -   name: Download artifacts
-            uses: actions/download-artifact@v4
-            with:
-                name: Test-Results-${{matrix.nodejs-version}}-${{matrix.operating-system}}
-        -   name: Read artifacts
-            run: cat test-results.xml | head -n 10
+                name: code-coverage-artifacts
+                path: coverage
