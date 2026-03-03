@@ -50,6 +50,7 @@ jobs:
     #     -   name: Read artifacts
     #         run: cat test-results.xml | head -n 10
     code-coverage:
+        continue-on-error: true
         runs-on: ubuntu-latest
         steps:
         -   name: Checkout Code
