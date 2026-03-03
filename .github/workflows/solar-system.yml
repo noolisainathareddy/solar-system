@@ -36,6 +36,8 @@ jobs:
         needs: unit-testing
         steps:
         -   name: Download artifacts
-            uses: actions/download-artifacts@v4
+            uses: actions/download-artifact@v4
             with:
                 name: Test Results
+        -   name: Read artifacts
+            run: cat test-results.xml | head -n 10
