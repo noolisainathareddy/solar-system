@@ -88,6 +88,7 @@ jobs:
                 name: ${{ matrix.operating-system }}-${{ matrix.nodejs-version }}-code-coverage-artifacts
                 path: coverage
     docker-image-creation:
+        needs: [unit-testing,code-coverage]
         runs-on: ubuntu-latest
         steps:
         -   name: Checkout Code
