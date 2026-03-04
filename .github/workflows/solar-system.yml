@@ -96,7 +96,7 @@ jobs:
                 username: ${{ vars.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
         -   name: Pull image
-            run: docker pull nooli/solar-system
+            run: docker pull nooli/solar-system:599841997ec62cce7326cf47f54c93d362c79311
         -   name: List images
             run: docker images
             
