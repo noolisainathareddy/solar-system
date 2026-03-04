@@ -93,7 +93,7 @@ jobs:
                 username: ${{ vars.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
         -   name: Pull image
-            run: docker pull https://hub.docker.com/repositories/nooli/solar-system
+            run: docker pull nooli/solar-system:latest
         -   name: List images
             run: docker images
             
