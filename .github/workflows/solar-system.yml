@@ -93,4 +93,4 @@ jobs:
                 username: ${{ vars.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
         -   name: List docker images
-            run: docker ls -a 
+            run: docker images -a
