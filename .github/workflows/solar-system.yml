@@ -90,13 +90,21 @@ jobs:
     docker-image-creation:
         runs-on: ubuntu-latest
         steps:
+        -   name: Checkout Code
+            uses: actions/checkout@v4
         -   name: Login to docker
             uses: docker/login-action@v3
             with:
                 username: ${{ vars.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
+        -   name: Build and push image
+            uses: docker/build-push-action@v6
+            with:
+                context: .
+                push: true
+                tags: nooli/solar-system:latest
         -   name: Pull image
-            run: docker pull nooli/solar-system:599841997ec62cce7326cf47f54c93d362c79311
+            run: docker pull nooli/solar-system:latest
         -   name: List images
             run: docker images
             
